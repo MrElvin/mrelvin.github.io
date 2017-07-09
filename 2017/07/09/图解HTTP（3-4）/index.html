@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="HTTP," />
 
 
 
@@ -87,15 +87,67 @@
 
 
 
-<meta name="description" content="嘘...小点声，这里是博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MrElvin">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="HTTP报文内的HTTP信息
+HTTP通信过程：包括从客户端发往服务器端的请求以及从服务器端返回客户端的响应
+
+HTTP报文
+用于HTTP协议交互的信息被称为HTTP报文，分为报文首部和报文主体两块。通常不一定有报文主体
+
+
+请求报文的结构
+请求报文的例子：
+
+响应报文的结构
+
+两种报文的首部由以下组成：
+
+请求行：包含请求方法，请求URI和HTTP版本
+状态行：包含表明响应结果的状态码，原因短语">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图解HTTP（3-4）">
+<meta property="og:url" content="http://yoursite.com/2017/07/09/图解HTTP（3-4）/index.html">
 <meta property="og:site_name" content="MrElvin">
-<meta property="og:description" content="嘘...小点声，这里是博客">
+<meta property="og:description" content="HTTP报文内的HTTP信息
+HTTP通信过程：包括从客户端发往服务器端的请求以及从服务器端返回客户端的响应
+
+HTTP报文
+用于HTTP协议交互的信息被称为HTTP报文，分为报文首部和报文主体两块。通常不一定有报文主体
+
+
+请求报文的结构
+请求报文的例子：
+
+响应报文的结构
+
+两种报文的首部由以下组成：
+
+请求行：包含请求方法，请求URI和HTTP版本
+状态行：包含表明响应结果的状态码，原因短语">
+<meta property="og:image" content="http://ostletczs.bkt.clouddn.com/HTTPInfo.png">
+<meta property="og:image" content="http://ostletczs.bkt.clouddn.com/requestStruct.png">
+<meta property="og:image" content="http://ostletczs.bkt.clouddn.com/requestDemo.png">
+<meta property="og:image" content="http://ostletczs.bkt.clouddn.com/responseStruct.png">
+<meta property="og:image" content="http://ostletczs.bkt.clouddn.com/responseDemo.png">
+<meta property="og:updated_time" content="2017-07-09T11:03:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MrElvin">
-<meta name="twitter:description" content="嘘...小点声，这里是博客">
+<meta name="twitter:title" content="图解HTTP（3-4）">
+<meta name="twitter:description" content="HTTP报文内的HTTP信息
+HTTP通信过程：包括从客户端发往服务器端的请求以及从服务器端返回客户端的响应
+
+HTTP报文
+用于HTTP协议交互的信息被称为HTTP报文，分为报文首部和报文主体两块。通常不一定有报文主体
+
+
+请求报文的结构
+请求报文的例子：
+
+响应报文的结构
+
+两种报文的首部由以下组成：
+
+请求行：包含请求方法，请求URI和HTTP版本
+状态行：包含表明响应结果的状态码，原因短语">
+<meta name="twitter:image" content="http://ostletczs.bkt.clouddn.com/HTTPInfo.png">
 
 
 
@@ -123,13 +175,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/09/图解HTTP（3-4）/"/>
 
 
 
 
 
-  <title> MrElvin </title>
+  <title> 图解HTTP（3-4） | MrElvin </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -164,9 +216,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -259,9 +309,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -291,10 +341,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/07/09/图解HTTP（3-4）/" itemprop="url">
-                  图解HTTP（3-4）
-                </a>
+                图解HTTP（3-4）
               
             
           </h1>
@@ -355,9 +402,7 @@
       
 
       
-        
-          
-            <h2 id="HTTP报文内的HTTP信息"><a href="#HTTP报文内的HTTP信息" class="headerlink" title="HTTP报文内的HTTP信息"></a>HTTP报文内的HTTP信息</h2><blockquote>
+        <h2 id="HTTP报文内的HTTP信息"><a href="#HTTP报文内的HTTP信息" class="headerlink" title="HTTP报文内的HTTP信息"></a>HTTP报文内的HTTP信息</h2><blockquote>
 <p>HTTP通信过程：包括从客户端发往服务器端的请求以及从服务器端返回客户端的响应</p>
 </blockquote>
 <h4 id="HTTP报文"><a href="#HTTP报文" class="headerlink" title="HTTP报文"></a>HTTP报文</h4><blockquote>
@@ -508,429 +553,78 @@
 </ol>
 <p><strong>注：状态码不一定能够确实反映状况。比如Web应用程序内部发生错误，状态码依然返回200 OK</strong></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <div>
+      
+        
+
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/08/图解HTTP（1-2）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="MrElvin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MrElvin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/08/图解HTTP（1-2）/" itemprop="url">
-                  图解HTTP（1-2）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-08T18:39:30+08:00">
-                2017-07-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/HTTP/" rel="tag"># HTTP</a>
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/07/08/图解HTTP（1-2）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/07/08/图解HTTP（1-2）/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
         
-          
-            <h2 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h2><blockquote>
-<p> HTTP协议是TCP/IP协议的子集。</p>
-</blockquote>
-<h4 id="TCP-IP协议族各层的作用如下："><a href="#TCP-IP协议族各层的作用如下：" class="headerlink" title="TCP/IP协议族各层的作用如下："></a>TCP/IP协议族各层的作用如下：</h4><ol>
-<li><p><strong>应用层</strong></p>
-<p>应用层决定了向用户提供应用服务时通信的活动。HTTP协议就处于该层。</p>
-</li>
-<li><p><strong>传输层</strong></p>
-<p>传输层对上层应用层，提供处于网络连接中的两台计算机之间的数据传输。包括TCP协议和UDP协议。</p>
-</li>
-<li><p><strong>网络层</strong></p>
-<p>网络层用于处理在网络上流动的数据包。数据包是网络传输的最小数据单位。该层规定了通过怎样的路径（传输路线）到达对方计算机，并把数据包传送给对方。</p>
-<p>与对方计算机之间通过多台计算机或网络设备进行传输的时候，网络层所起的作用就是在众多的选项中选择一条传输路线。</p>
-</li>
-<li><p><strong>数据链路层</strong></p>
-<p>用来处理连接网络的硬件部分。包括控制操作系统、硬件的设备驱动、NIC（Network Interface Card，网络适配器，即网卡），及光纤等物理可见部分（还包括连接器等一切传输媒介）。硬件上的范畴均在链路层的作用范围之内。</p>
-</li>
-</ol>
-<blockquote>
-<p>利用TCP/IP协议族进行网络通信的时候，会通过分层顺序与对方进行通信。发送端从应用层往下走，接收端则从应用层往上走。</p>
-</blockquote>
-<h4 id="负责传输的IP协议"><a href="#负责传输的IP协议" class="headerlink" title="负责传输的IP协议"></a>负责传输的IP协议</h4><blockquote>
-<p>IP协议属于网络层</p>
-</blockquote>
-<p>IP 协议的作用是把各种数据包传送给对方。而要保证确实传送到对方那里，则需要满足各类条件。其中两个重要的条件是 IP 地址和 MAC 地址（Media Access Control Address）。</p>
-<p>IP地址指明了节点被分配到的地址，MAC地址是指网卡所属的固定地址。IP地址可以和MAC地址进行配对。IP地址可以变换，但是MAC地址基本上不会更改。</p>
-<p>IP间的通信依赖MAC地址。在网络中转时，会利用下一站中转设备的MAC地址来搜索下一个中转目标。这时会采用ARP协议。ARP是用于解析地址的协议，根据通信方的IP地址就可以反查出对应的MAC地址。</p>
-<blockquote>
-<p>ARP协议解析同一局域网内的MAC地址，通过广播的方式</p>
-</blockquote>
-<h4 id="确保可靠性的TCP协议"><a href="#确保可靠性的TCP协议" class="headerlink" title="确保可靠性的TCP协议"></a>确保可靠性的TCP协议</h4><blockquote>
-<p>TCP协议属于传输层，提供可靠的字节流服务</p>
-</blockquote>
-<p>所谓的字节流服务是指，为了方便传输，将大块数据分割成以报文段（segment）为单位的数据包进行管理。而可靠的传输服务是指，能够把数据准确可靠地传给对方。一言以蔽之，TCP 协议为了更容易传送大数据才把数据分割，而且 TCP 协议能够确认数据最终是否送达到对方。</p>
-<p><strong>三次握手：</strong></p>
-<p>握手过程中使用了TCP的标志——SYN和ACK</p>
-<p>发送端首先发送一个带 SYN 标志的数据包给对方。接收端收到后，回传一个带有 SYN/ACK 标志的数据包以示传达确认信息。最后，发送端再回传一个带 ACK 标志的数据包，代表“握手”结束。</p>
-<p>若在握手过程中某个阶段莫名中断，TCP 协议会再次以相同的顺序发送相同的数据包。</p>
-<h4 id="负责域名解析的DNS服务"><a href="#负责域名解析的DNS服务" class="headerlink" title="负责域名解析的DNS服务"></a>负责域名解析的DNS服务</h4><blockquote>
-<p>DNS协议属于应用层，提供域名到IP地址之间的解析服务</p>
-</blockquote>
-<p>DNS协议提供通过域名查找IP地址，或逆向从IP地址反查域名的服务。</p>
-<h4 id="URI和URL"><a href="#URI和URL" class="headerlink" title="URI和URL"></a>URI和URL</h4><p>URL：统一资源定位符（Uniform Resource Locator）</p>
-<p>URI： 统一资源标识符（Uniform Resource Identifier）</p>
-<p><strong>URI：统一资源定位符</strong></p>
-<ul>
-<li><p>Uniform：</p>
-<p>规定统一的格式可方便处理多种不同类型的资源，而不用根据上下文环境来识别资源指定的访问方式。另外，加入新增的协议方案（如 http: 或 ftp:）也更容易</p>
-</li>
-<li><p>Resource：</p>
-<p>资源的定义是“可标识的任何东西”。资源不仅可以是单一的，也可以是多数的集合体。</p>
-</li>
-<li><p>Identifier：</p>
-<p>表示可标识的对象，也称为标识符。</p>
-</li>
-</ul>
-<blockquote>
-<p>URI就是由某个协议方案表示的资源的定位标识符。协议方案是指访问资源所使用的协议类型名称。</p>
-</blockquote>
-<p>URI用字符串标识某一互联网资源，而URL表示资源的地点（互联网上所处位置）。可见URL是URI的子集。</p>
-<p><code>mailto: cay@hostman.com</code>不属于定位符，因为无法定位到任何资源，而属于URI</p>
-<p>比如用URL标识一个人：</p>
-<p>动物住址协议://地球/中国/浙江省/杭州市/西湖区/某大学/14号宿舍楼/525号寝/张三.人</p>
-<p>用URI标识一个人：</p>
-<p>身份证号：123456</p>
-<p>两者都可以标识一个人，但是URI不能将其定位。</p>
-<p><strong>URI格式</strong></p>
-<p>绝对URI的格式</p>
-<p><strong><code>http://user:pass@www.example.jp:80/dir/index.html?uid=1#ch1</code></strong></p>
-<p><strong>协议方案名://登录信息（认证）@服务器地址:服务器端口号/带层次的文件路径?查询字符串#片段标识符</strong></p>
-<p>登录信息（认证）、端口号和片段标识符是可选项</p>
-<h2 id="简单的HTTP协议"><a href="#简单的HTTP协议" class="headerlink" title="简单的HTTP协议"></a>简单的HTTP协议</h2><blockquote>
-<p>请求访问文本或图像等资源的一端成为客户端，而提供资源响应的一端称为服务端；</p>
-<p>请求必定由客户端发出，而服务器端回复响应</p>
-</blockquote>
-<p><strong>请求报文的构成</strong></p>
-<p><img src="http://ostletczs.bkt.clouddn.com/requestHTTP.png" alt="requestHTTP"></p>
-<p><strong>响应报文的构成</strong></p>
-<p><img src="http://ostletczs.bkt.clouddn.com/responseHTTP.png" alt="responseHTTP"></p>
-<h4 id="HTTP是不保存状态的协议"><a href="#HTTP是不保存状态的协议" class="headerlink" title="HTTP是不保存状态的协议"></a>HTTP是不保存状态的协议</h4><blockquote>
-<p>HTTP是一种不保存状态，即无状态协议，协议自身不对请求和响应之间的通信状态进行保存。即协议对于发送过的请求或响应都不做持久化处理。</p>
-</blockquote>
-<p>但现在可以使用Cookie等方式进行状态管理。</p>
-<h4 id="请求URI定位资源"><a href="#请求URI定位资源" class="headerlink" title="请求URI定位资源"></a>请求URI定位资源</h4><p><strong>指定请求URI的方式</strong></p>
-<ol>
-<li><p>URI为完整的请求URI，请求方法后面是URI</p>
-<p><code>GET http://hackr.jp/index.htm HTTP/1.1</code></p>
-</li>
-<li><p>在首部字段Host中写明网络域名或IP地址</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GET /index.htm HTTP/1.1</div><div class="line">Host: hackr.jp</div></pre></td></tr></table></figure>
-<p>除此之外，如果不是访问特定资源而是对服务器本身发起请求，可以用一个 * 来代替请求 URI。下面这个例子是查询 HTTP 服务器端支持 的 HTTP 方法种类</p>
-<p>​     <code>OPTIONS*HTTP/1.1</code></p>
-</li>
-</ol>
-<h4 id="告知服务器意图的HTTP方法"><a href="#告知服务器意图的HTTP方法" class="headerlink" title="告知服务器意图的HTTP方法"></a>告知服务器意图的HTTP方法</h4><ol>
-<li><strong>GET：获取资源</strong></li>
-<li><strong>POST：传输实体主体</strong></li>
-<li><strong>PUT：传输文件</strong></li>
-<li><strong>HEAD：获得报文首部</strong></li>
-<li><strong>DELETE：删除文件</strong></li>
-<li><strong>OPTIONS：询问支持的方法</strong></li>
-<li><strong>TRACE：追踪路径</strong></li>
-<li><strong>CONNECT：要求用隧道协议链接代理</strong></li>
-</ol>
-<h4 id="持久连接节省通信量"><a href="#持久连接节省通信量" class="headerlink" title="持久连接节省通信量"></a>持久连接节省通信量</h4><blockquote>
-<p>持久连接的特点是，只要任意一端没有明确提出断开连接，则保持TCP连接状态</p>
-</blockquote>
-<p>持久连接的好处在于减少了TCP连接的重复建立和断开所造成的额外开销，减轻了服务器端的负载。另外，减少开销的那部分时间，可以使HTTP请求和响应能够更早地结束，这样Web页面的显示速度也就相应提高了。</p>
-<p><img src="http://ostletczs.bkt.clouddn.com/keep-alive.png" alt="keep-alive"></p>
-<p><strong>管线化</strong></p>
-<p>之前发送一个请求需要等待并受到响应后，才能发送下一个请求。管线化技术出现后，不用等待响应亦可以直接发送下一个请求。</p>
-<blockquote>
-<p>请求数越多，管线化比持久连接的优点更加明显</p>
-</blockquote>
-<p><img src="http://ostletczs.bkt.clouddn.com/pipelining.png" alt="pipelining"></p>
-<h4 id="使用Cookie的状态管理"><a href="#使用Cookie的状态管理" class="headerlink" title="使用Cookie的状态管理"></a>使用Cookie的状态管理</h4><blockquote>
-<p>HTTP是无状态协议，无法根据之前的状态进行本次的请求处理</p>
-</blockquote>
-<p>Cookie技术通过在请求和响应报文中写入Cookie信息来控制客户端的状态。</p>
-<p>Cookie会根据从服务器端发送的响应报文内的一个叫做Set-Cookie的首部字段信息，通知客户端保存Cookie。当下次客户端再往该服务器发送请求时，客户端会自动在请求报文中加入Cookie值后发出去。</p>
-<p>服务器端在发现客户端发送过来的Cookie后，会去检查究竟是哪个客户端发送的连接请求，然后对比服务器上的记录，最后得到之前的状态信息。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/13/hello/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="MrElvin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MrElvin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/07/08/图解HTTP（1-2）/" rel="next" title="图解HTTP（1-2）">
+                <i class="fa fa-chevron-left"></i> 图解HTTP（1-2）
+              </a>
             
-              
-                
-                <a class="post-title-link" href="/2017/04/13/hello/" itemprop="url">
-                  博客？嗯博客
-                </a>
-              
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-13T00:07:41+08:00">
-                2017-04-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/04/13/hello/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/13/hello/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>啊~ ~ ~本人菜鸡一个，鼓捣一晚上终于把博客搭好了！  虽然还有一些细节和第三方的应用没有完成，但是已经迫不及待写点什么了😁  </p>
-<p>第一篇博客就介绍下自己吧，本科在北邮数媒学的工业设计，研究生换了专业去学数媒技术了，所以还要在我的小破邮呆三年。目前研零阶段，学了一段时间前端了，也算是入了门了，之后希望在前端技术上稳步前（pa）行，慢慢从小白变为大牛~</p>
-<h3 id="为啥要弄个博客嘞，你咋不上天嘞"><a href="#为啥要弄个博客嘞，你咋不上天嘞" class="headerlink" title="为啥要弄个博客嘞，你咋不上天嘞"></a>为啥要弄个博客嘞，你咋不上天嘞</h3><p>前一阵和同学一起听了一个百度学长的分享会，其中他着重分享了写博客的好处，以及一本书<a href="http://52kindle.top/book/view/408" title="《暗时间》mobi格式电子书下载" target="_blank" rel="external">《暗时间》</a>。这本书其实就是作者几年博客的精华，其中介绍了时间的利用和高效做事的一些方式和方法，大家有兴趣可以去读一读呦~</p>
-<p>总之，这次分享和这本书给我和同学带来的直接影响就是决定要弄一个博客😄也希望将来可以通过博客达成记录想法和知识、分享转载优秀内容和展示自己的目的。</p>
-<p>写博客难在坚持，但我就要看看自己能坚持多久💪  </p>
-<p>下一篇博客准备分享一下我搭建博客的过程，希望可以帮到想要搭建个人博客的同学们🙏</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -938,6 +632,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -957,8 +662,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpeg"
@@ -1031,6 +745,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP报文内的HTTP信息"><span class="nav-number">1.</span> <span class="nav-text">HTTP报文内的HTTP信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP报文"><span class="nav-number">1.0.1.</span> <span class="nav-text">HTTP报文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求报文的结构"><span class="nav-number">1.0.2.</span> <span class="nav-text">请求报文的结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应报文的结构"><span class="nav-number">1.0.3.</span> <span class="nav-text">响应报文的结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#报文主体和实体主体的差异"><span class="nav-number">1.0.4.</span> <span class="nav-text">报文主体和实体主体的差异</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回结果的HTTP状态码"><span class="nav-number">2.</span> <span class="nav-text">返回结果的HTTP状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2XX-成功"><span class="nav-number">2.0.1.</span> <span class="nav-text">2XX 成功</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3XX-重定向"><span class="nav-number">2.0.2.</span> <span class="nav-text">3XX 重定向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4XX-客户端错误"><span class="nav-number">2.0.3.</span> <span class="nav-text">4XX 客户端错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5XX-服务器错误"><span class="nav-number">2.0.4.</span> <span class="nav-text">5XX 服务器错误</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1136,6 +866,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
@@ -1152,9 +886,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'https-mrelvin-github-io';
-      var disqus_identifier = 'index.html';
+      var disqus_identifier = '2017/07/09/图解HTTP（3-4）/';
 
-      var disqus_title = "";
+      var disqus_title = "图解HTTP（3-4）";
 
 
       function run_disqus_script(disqus_script) {
@@ -1167,6 +901,13 @@
 
       run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
       
 
     </script>
