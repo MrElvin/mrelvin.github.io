@@ -270,6 +270,207 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/10/图解HTTP（5-6）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MrElvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MrElvin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/10/图解HTTP（5-6）/" itemprop="url">
+                  图解HTTP（5-6）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-10T13:33:46+08:00">
+                2017-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/10/图解HTTP（5-6）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/07/10/图解HTTP（5-6）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="与HTTP协作的Web服务器"><a href="#与HTTP协作的Web服务器" class="headerlink" title="与HTTP协作的Web服务器"></a>与HTTP协作的Web服务器</h2><h4 id="通信数据转发程序：代理、网关、隧道"><a href="#通信数据转发程序：代理、网关、隧道" class="headerlink" title="通信数据转发程序：代理、网关、隧道"></a>通信数据转发程序：代理、网关、隧道</h4><ol>
+<li><p><strong>代理</strong></p>
+<p>代理是一种有转发功能的应用程序，其扮演了位于服务器和客户端“中间人”的角色，接收由客户端发送的请求并转发给服务器，同时也接收服务器返回的响应并转发给客户端。</p>
+<blockquote>
+<p>代理不改变请求URI，会直接发送给前方持有资源的目标服务器。持有资源实体的服务器被称为源服务器</p>
+</blockquote>
+<p>代理按照分类基准不同会分为两大类。</p>
+<p><strong>缓存代理</strong>和<strong>非缓存代理</strong></p>
+<p><strong>透明代理</strong>和<strong>非透明代理</strong></p>
+</li>
+<li><p><strong>网关</strong></p>
+<p>网关是转发其他服务器通信数据的服务器，接收从客户端发送来的请求时，它就像自己拥有资源的源服务器一样对请求进行处理。</p>
+<blockquote>
+<p>网关能使通信线路上的服务器提供非HTTP协议服务，利用网关可以提高通信的安全性，可以在客户端和网关之间的通信线路上加密以确保连接的安全。</p>
+</blockquote>
+</li>
+<li><p><strong>隧道</strong></p>
+<p>隧道是在相隔甚远的客户端和服务器两者之间进行中转，并保持双方通信连接的应用程序。</p>
+<blockquote>
+<p>隧道可按要求建立起一条与其他服务器的通信线路，届时使用 SSL 等加密手段进行通信。隧道的目的是确保客户端能与服务器进行安全的通信。</p>
+<p>隧道本身不会解析HTTP请求。请求会保持原样中转给之后的服务器。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="HTTP首部"><a href="#HTTP首部" class="headerlink" title="HTTP首部"></a>HTTP首部</h2><p><strong>请求报文的结构：</strong></p>
+<p><img src="http://ostletczs.bkt.clouddn.com/requestDetail.png" alt="requestDetail"></p>
+<p><strong>响应报文的结构：</strong></p>
+<p><img src="http://ostletczs.bkt.clouddn.com/responseDetail.png" alt="responseDetail"></p>
+<h4 id="HTTP首部字段"><a href="#HTTP首部字段" class="headerlink" title="HTTP首部字段"></a>HTTP首部字段</h4><p><strong>HTTP首部字段结构</strong></p>
+<blockquote>
+<p>由首部字段名和字段值构成，中间用冒号分隔</p>
+<p><strong>首部字段名: 字段值</strong></p>
+</blockquote>
+<p>字段值对应单个HTTP首部字段可以有多个值。</p>
+<p><code>Keep-Alive: timeout=15, max=10</code></p>
+<blockquote>
+<p>若HTTP首部字段重复了，根据浏览处理表现不同，有些优先处理第一次出现的首部字段，有些优先处理最后出现的首部字段</p>
+</blockquote>
+<p><strong>四种HTTP首部字段类型</strong></p>
+<ol>
+<li><p><strong>通用首部字段</strong></p>
+<blockquote>
+<p>请求报文和响应报文两方都会使用的首部</p>
+</blockquote>
+</li>
+<li><p><strong>请求首部字段</strong></p>
+<blockquote>
+<p>从客户端向服务器端发送请求报文时使用的首部，补充了请求的附加内容、客户端信息、响应内容相关优先级等信息</p>
+</blockquote>
+</li>
+<li><p><strong>响应首部字段</strong></p>
+<blockquote>
+<p>从服务器端向客户端返回响应报文时使用的首部。补充了响应的附加内容，也会要求客户端附加额外的内容信息</p>
+</blockquote>
+</li>
+<li><p><strong>实体首部字段</strong></p>
+<blockquote>
+<p>针对请求报文和响应报文的实体部分使用的首部。补充了资源内容更新时间等与实体有关的信息</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="通用首部字段"><a href="#通用首部字段" class="headerlink" title="通用首部字段"></a>通用首部字段</h4><ol>
+<li><p><strong>Cache-Control</strong></p>
+<blockquote>
+<p>控制缓存行为</p>
+</blockquote>
+<p>​</p>
+</li>
+<li><p>​</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/09/图解HTTP（3-4）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -973,7 +1174,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
