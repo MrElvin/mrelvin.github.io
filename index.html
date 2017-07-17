@@ -270,6 +270,136 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/17/图解HTTP（7-8）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MrElvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MrElvin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/17/图解HTTP（7-8）/" itemprop="url">
+                  图解HTTP（7-8）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T17:19:25+08:00">
+                2017-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/17/图解HTTP（7-8）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/07/17/图解HTTP（7-8）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/10/图解HTTP（5-6）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -423,11 +553,445 @@
 <blockquote>
 <p>控制缓存行为</p>
 </blockquote>
+<p><strong>public 指令</strong>：表明其他用户也可以利用缓存</p>
+<p><strong>private 指令</strong>：响应只以特定的用户作为对象，这与 public 指令的行为相反</p>
+<p><strong>no-cache 指令</strong>：防止从缓存中返回过期的资源，客户端的请求中如果包含该指令，则表示客户端不会接收缓存过的响应；如果服务器的响应中包含该指令，那么缓存服务器不能对资源进行缓存</p>
 <p>​</p>
-</li>
-<li><p>​</p>
+<p><strong>no-store 指令</strong>： no-cache 表示不缓存过期的资源，缓存会向源服务器进行有效期确认后处理资源。而 no-store 是真正不进行缓存，该指令规定缓存不能在本地存储请求或响应的任何一部分</p>
 </li>
 </ol>
+<p>​    <strong>s-maxage 指令</strong>： 与 max-age 指令相同，但该指令只适用于供多位用户使用的公共缓存服务器（如：代理）。当使用该指令后，直接忽略对 Expires 首部字段以及 max-age 指令的处理</p>
+<p>​    <strong>max-age 指令</strong>： （单位：秒）当客户端发送的请求包含该指令时，如果判定缓存资源的缓存时间数值被指定时间的数值更小，那么客户端就接收缓存的资源，当 max-age 为 0 的时候，缓存服务器通常需要将请求转发给源服务器； 当服务器返回的响应中包含该指令的时候，缓存服务器将不对资源的有效性再作确认，而 max-age 数值代表资源保存为缓存的最长时间</p>
+<pre><code>&gt; HTTP/1.1 版本的缓存服务器遇到同时存在的 Expires 的首部字段时，会优先处理 max-age 指令
+</code></pre><p>​    <strong>max-stale 指令</strong>： 可指示缓存资源，即使过期也照常接收</p>
+<p>​    <strong>only-if-cached 指令</strong>： 表示客户端仅在缓存服务器本地缓存目标资源的情况下才会要求其返回</p>
+<p>​    <strong>must-revalidate 指令</strong>： 代理会向源服务器再次验证即将返回的响应缓存目前是否仍然有效，使用该命令会忽略请求的 max-stale 指令</p>
+<p>​    <strong>proxy-revalidate 指令</strong>： 要求所有的缓存服务器在接收到客户端带有该指令的请求返回响应之前，必须再次验证缓存的有效性</p>
+<p>​    <strong>no-transform 指令</strong>： 规定无论在请求还是响应中，缓存都不能改变实体主体的媒体类型</p>
+<ol>
+<li><p><strong>Connection</strong></p>
+<ul>
+<li><p>控制不再转发给代理的首部字段</p>
+<p><strong>Connection: 不再转发的首部字段名</strong>      在客户端发送的请求和服务器返回的响应内，使用 Connection 首部字段，可控制不再转发给代理的首部字段（即 Hop-by-hop 首部）</p>
+</li>
+<li><p>管理持久连接</p>
+<p><strong>Connection: close</strong>     当服务端想明确断开连接时使用</p>
+<p><strong>Connection: Keep-Alive</strong>      在旧版本HTTP协议上维持持续连接使用</p>
+<blockquote>
+<p>HTTP/1.1 版本默认连接为持久连接， 1.1 之前版本默认是非持久连接</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p><strong>Date</strong></p>
+<blockquote>
+<p>表明创建 HTTP 报文的日期和时间</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Pragma</strong></p>
+<blockquote>
+<p>HTTP/1.1 之前版本的历史遗留字段，仅作为与 HTTP/1.0 的向后兼容而定义</p>
+</blockquote>
+<p><strong>Pragma: no-cache</strong>      属于通用首部字段，但是只用在客户端发送的请求中。客户端会要求所有的中间服务器不返回缓存的资源</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>Trailer</strong></p>
+<blockquote>
+<p>用于事先说明在报文主体后记录了哪些首部字段</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Transfer-Encoding</strong></p>
+<blockquote>
+<p>规定传输报文主体时采用的编码方式</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Upgrade</strong></p>
+<blockquote>
+<p>用于检测 HTTP 协议及其他协议是否可使用更高的版本进行通信</p>
+</blockquote>
+<p>注意 Upgrade 首部字段产生作用的 Upgrade 对象仅限于客户端和邻接服务器之间。因此，使用该字段的时候，还需要额外指定 Connection: Upgrade</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>Via</strong></p>
+<blockquote>
+<p>用于追踪客户端和服务器之间的请求和响应报文的传输路径</p>
+</blockquote>
+<p>报文经过代理或网关时，会先在首部字段 Via 中附加该服务器的信息，然后再进行转发。常常和 TRACE 方法一起使用</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>Warning</strong></p>
+<blockquote>
+<p>通常会告知用户一些与缓存相关问题的警告</p>
+</blockquote>
+<p>格式如下：</p>
+<p><strong>Warning: 【警告码】【警告的主机: 端口号】“警告内容”（【日期时间】）</strong></p>
+</li>
+</ol>
+<h4 id="请求首部字段"><a href="#请求首部字段" class="headerlink" title="请求首部字段"></a>请求首部字段</h4><ol>
+<li><p><strong>Accept</strong></p>
+<blockquote>
+<p>告知服务器，用户代理能够处理的媒体类型以及媒体类型的相对优先级（根据百度，用户代理指的是浏览器的意思。。。）</p>
+</blockquote>
+<p>Accept: text/plain; q=0.3, text/htm</p>
+<blockquote>
+<p>q 代表权重值，默认是 1          最好是发给我 HTML，如果没有发给我 TEXT 格式的</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Accept-Charset</strong></p>
+<blockquote>
+<p>告知服务器用户代理支持的字符集，以及字符集的优先顺序。同样可以使用 q 来表示相对优先级</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Accept-Encoding</strong></p>
+<blockquote>
+<p>告知服务器用户代理支持的内容编码以及内容编码的优先级顺序， * 表示任意的编码格式</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Accept-Language</strong></p>
+<blockquote>
+<p>告知服务器用户代理能够处理的自然语言集（指的是中文还是英文等），也可以指定优先级</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Authorization</strong></p>
+<blockquote>
+<p>告知服务器用户代理的认证信息（证书值）</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Expect</strong></p>
+<blockquote>
+<p>客户端告知服务器期望出现的某种特定行为</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>From</strong></p>
+<blockquote>
+<p>告知服务器使用用户代理的用户的电子邮件地址</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Host</strong></p>
+<blockquote>
+<p>告知服务器，请求的资源所处的互联网的主机名和端口号，是唯一一个必须被包含在请求内的首部字段</p>
+</blockquote>
+<p>该字段的设置与单台服务器分配多个域名的虚拟主机有关</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>If-Match</strong></p>
+<blockquote>
+<p>条件请求，服务器在接收到附加的条件请求后，只有判断指定条件为真时，才会执行请求</p>
+</blockquote>
+<p>当 If-Match 字段值跟 ETag 值匹配一致时，服务器才会接受请求</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>If-Modified-Since</strong></p>
+<blockquote>
+<p>告知服务器若该字段的值早于资源更新的时间，则希望服务器处理请求</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>If-None-Match</strong> </p>
+<blockquote>
+<p>与 If-Match 作用相反。</p>
+</blockquote>
+<p>可以使用 GET 或 HEAD 方法中使用首部字段 If-None-Match 获取最新资源</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>If-Range</strong></p>
+<blockquote>
+<p>告知服务器若指定的 If-Range 字段值（ETag 值或者时间）和请求资源的 ETag 值或时间相一致时，则作为范围请求处理。反之，则返回全体资源</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>If-Unmodified-Since</strong></p>
+<blockquote>
+<p>与 If-Modified-Since 作用相反，指定请求的资源只有在字段值内指定的日期时间之后，未发生更新，才能处理请求</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Max-Forwards</strong></p>
+<blockquote>
+<p>该字段以十进制整数形式指定可经过的服务器最大数目。服务器在往下一个服务器转发请求之前，Max-Forwards 的值减 1 后重新赋值。当服务器接收到 Max-Forwards 值为 0 的请求时，则不再进行转发，而是直接返回响应</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Proxy-Authorization</strong></p>
+<blockquote>
+<p>接收到从 <strong>代理服务器</strong> 发来的认证质询时，客户端会发送包含首部字段 Proxy-Authorization 的请求，以告知服务器认证所需要的信息</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Range</strong></p>
+<blockquote>
+<p>对于只需获取部分资源的范围请求，包含首部字段 Range 即可告知服务器资源的指定范围</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Referer</strong></p>
+<blockquote>
+<p>告知服务器请求的原始资源的 URI</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>TE</strong></p>
+<blockquote>
+<p>告知服务器客户端能够处理响应的传输编码方式及相对优先级。它和首部字段 Accept-Encoding 的功能很相像，但是用于传输编码（ Transfer-encoding）</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>User-Agent</strong></p>
+<blockquote>
+<p>会将创建请求的浏览器和用户代理名称等信息传达给服务器</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="响应首部字段"><a href="#响应首部字段" class="headerlink" title="响应首部字段"></a>响应首部字段</h4><ol>
+<li><p><strong>Accept-Ranges</strong></p>
+<blockquote>
+<p>告知客户端服务器是否能处理范围请求，以指定获取服务器端某个部分的资源</p>
+</blockquote>
+<p>当可处理范围请求时指定其为 bytes，反之则指定其为 none</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>Age</strong></p>
+<blockquote>
+<p>告知客户端，源服务器在多久前创建了响应。字段值的单位为秒</p>
+</blockquote>
+<p>若创建该响应的服务器是缓存服务器，Age 值是指缓存后的响应再次发起认证到认证完成的时间值。代理创建响应时必须加上首部字段 Age</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>ETag</strong></p>
+<blockquote>
+<p>告知客户端实体表识，它是一种可以将资源以字符串形式做唯一性标识的方式。</p>
+</blockquote>
+<p>服务器会对每份资源分配对应的 Etag 值。当资源更新的时候，ETag 值也需要更新。</p>
+<blockquote>
+<p>强 ETag 值：不论实体发生多么细微的变化都会改变其值     ETag: “usagi-1234”</p>
+<p>弱 ETag 值：只用于提示资源是否相同，只有资源发生根本改变，产生差异时候，才会改变    </p>
+<p>​                      ETag: W/“usagi-1234”</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Location</strong></p>
+<blockquote>
+<p>使用该字段可以将响应接收方引导至某个与请求 URI 位置不同的资源</p>
+</blockquote>
+<p>配合 3xx 状态码使用，提供重定向 URI</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>Proxy-Authenticate</strong></p>
+<blockquote>
+<p>该字段会把由代理服务器所要求的认证信息发送给客户端</p>
+</blockquote>
+<p>认证行为在客户端和代理之间进行，客户端与服务器进行认证时，首部字段 WWW-Authorization 有着相同作用</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>Retry-After</strong></p>
+<blockquote>
+<p>告知客户端应该在多久后再次发送请求</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Server</strong></p>
+<blockquote>
+<p>首部字段 Server 告知客户端当前服务器上安装的 HTTP 服务器应用程序的信息。不单单会标出服务器上的软件应用名称，还有可能包括版本号和安装时启用的可选项</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Vary</strong></p>
+<blockquote>
+<p>从代理服务器接收到源服务器返回包含 Vary 指定项的响应之后，若再要进行缓存，仅对请求中含有相同 Vary 指定首部字段的请求返回缓存。即使对相同资源发起请求，但由于 Vary 指定的首部字段不相同，因此必须要从源服务器重新获取资源。</p>
+</blockquote>
+<p>首部字段 Vary 可对缓存进行控制。源服务器会向代理服务器传达关于本地缓存使用方法的命令</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>WWW-Authenticate</strong></p>
+<blockquote>
+<p>用于 HTTP 访问认证。它会告知客户端适用于访问请求 URI 所指定资源的认证方案（Basic 或是 Digest）和带参数提示的质询（challenge）</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="实体首部字段"><a href="#实体首部字段" class="headerlink" title="实体首部字段"></a>实体首部字段</h4><blockquote>
+<p>请求和响应两方的 HTTP 报文中都含有与实体相关的首部字段</p>
+</blockquote>
+<ol>
+<li><p><strong>Allow</strong></p>
+<blockquote>
+<p>用于通知客户端能够支持 Request-URI 指定资源的所有 HTTP 方法</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Content-Encoding</strong></p>
+<blockquote>
+<p>告知客户端服务器对实体的主体部分选用的内容编码方式，内容编码是指在不丢失实体信息的前提下所进行的压缩，常见的有：gzip，compress，deflate，identity</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Content-Language</strong></p>
+<blockquote>
+<p>告知客户端，实体主体使用的自然语言（如：中文英文）</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Content-Length</strong></p>
+<blockquote>
+<p>表明实体主体部分的大小（单位：字节），若对实体主体进行编码传输，不能使用该字段</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Content-Location</strong></p>
+<blockquote>
+<p>首部字段 Content-Location 给出与报文主体部分相对应的 URI。和首部字段 Location 不同，Content-Location 表示的是报文主体返回资源对应的 URI</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Content-MD5</strong></p>
+<blockquote>
+<p>首部字段 Content-MD5 是一串由 MD5 算法生成的值，其目的在于检查报文主体在传输过程中是否保持完整，以及确认传输到达</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Content-Range</strong></p>
+<blockquote>
+<p>针对范围请求，返回响应时使用的首部字段 Content-Range，能告知客户端作为响应返回的实体的哪个部分符合范围请求。字段值以字节为单位，表示当前发送部分及整个实体大小</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>Content-type</strong></p>
+<blockquote>
+<p>首部字段 Content-Type 说明了实体主体内对象的媒体类型。和首部字段 Accept 一样，字段值用 type/subtype 形式赋值</p>
+<p>参数 charset 使用 iso-8859-1 或 euc-jp 等字符集进行赋值</p>
+</blockquote>
+<p>Content-Type: text/html; charset=UTF-8</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>Expires</strong></p>
+<blockquote>
+<p>首部字段 Expires 会将资源失效的日期告知客户端。缓存服务器在接收到含有首部字段 Expires 的响应后，会以缓存来应答请求，在 Expires 字段值指定的时间之前，响应的副本会一直被保存。当超过指定的时间后，缓存服务器在请求发送过来时，会转向源服务器请求资源</p>
+</blockquote>
+<p>源服务器不希望缓存服务器对资源缓存时，最好在 Expires 字段内写入与首部字段 Date 相同的时间值。</p>
+<p>但是，当首部字段 Cache-Control 有指定 max-age 指令时，比起首部字段 Expires，会优先处理 max-age 指令</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>Last-Modified</strong></p>
+<blockquote>
+<p>指明资源最终修改的时间，一般这个值就是 Request-URI 指定资源被修改的时间</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="为-Cookie-服务的首部字段"><a href="#为-Cookie-服务的首部字段" class="headerlink" title="为 Cookie 服务的首部字段"></a>为 Cookie 服务的首部字段</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">首部字段名</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">首部类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Set-Cookie</td>
+<td style="text-align:left">开始状态管理所使用的Cookie信息</td>
+<td style="text-align:left">响应首部字段</td>
+</tr>
+<tr>
+<td style="text-align:left">Cookie</td>
+<td style="text-align:left">服务器接收到的Cookie信息</td>
+<td style="text-align:left">请求首部字段</td>
+</tr>
+</tbody>
+</table>
+<h5 id="Set-Cookie"><a href="#Set-Cookie" class="headerlink" title="Set-Cookie"></a>Set-Cookie</h5><ol>
+<li><p><strong>expires 属性</strong></p>
+<blockquote>
+<p>指定浏览器可以发送 Cookie 的有效期</p>
+</blockquote>
+<p>当省略 expires 属性时，其有效期仅限于维持浏览器会话（Session）时间段内。这通常限于浏览器应用程序被关闭之前</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>path 属性</strong></p>
+<blockquote>
+<p>可用于限制指定 Cookie 的发送范围的文件目录</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>domain 属性</strong></p>
+<blockquote>
+<p>通过 Cookie 的 domain 属性指定的域名可做到与结尾匹配一致。比如，当指定 example.com 后，除 example.com 以外，www1.example.com 或 www2.example.com 等都可以发送 Cookie</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p><strong>secure 属性</strong></p>
+<blockquote>
+<p>用于限制 Web 页面仅在 HTTPS 安全连接时，才可以发送 Cookie</p>
+</blockquote>
+<p>Set-Cookie: name=value; secure</p>
+</li>
+</ol>
+<ol>
+<li><p><strong>HTTPOnly 属性</strong></p>
+<blockquote>
+<p>Cookie 的 HttpOnly 属性是 Cookie 的扩展功能，它使 JavaScript 脚本无法获得 Cookie。其主要目的为防止跨站脚本攻击（Cross-site scripting，XSS）对 Cookie 的信息窃取</p>
+</blockquote>
+<p>Set-Cookie: name=value; HTTPOnly</p>
+</li>
+</ol>
+<h5 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h5><p>Cookie: status=enable</p>
+<blockquote>
+<p>首部字段 Cookie 会告知服务器，当客户端想获得 HTTP 状态管理支持时，就会在请求中包含从服务器接收到的 Cookie。接收到多个 Cookie 时，同样可以以多个 Cookie 形式发送</p>
+</blockquote>
 
           
         
@@ -1174,7 +1738,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
