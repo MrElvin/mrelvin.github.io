@@ -270,7 +270,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/17/图解HTTP（7-8）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/阿里云 CentOS 环境下 Node 环境搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MrElvin">
@@ -292,8 +292,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/07/17/图解HTTP（7-8）/" itemprop="url">
-                  图解HTTP（7-8）
+                <a class="post-title-link" href="/2018/05/16/阿里云 CentOS 环境下 Node 环境搭建/" itemprop="url">
+                  阿里云 CentOS 环境下 Node 环境搭建
                 </a>
               
             
@@ -309,8 +309,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T17:19:25+08:00">
-                2017-07-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T15:21:12+08:00">
+                2018-05-16
               </time>
             
 
@@ -328,8 +328,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/07/17/图解HTTP（7-8）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/07/17/图解HTTP（7-8）/" itemprop="commentCount"></span>
+                <a href="/2018/05/16/阿里云 CentOS 环境下 Node 环境搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/16/阿里云 CentOS 环境下 Node 环境搭建/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -357,7 +357,105 @@
       
         
           
-            
+            <h2 id="阿里云-CentOS-环境下-Node-环境搭建"><a href="#阿里云-CentOS-环境下-Node-环境搭建" class="headerlink" title="阿里云 CentOS 环境下 Node 环境搭建"></a>阿里云 CentOS 环境下 Node 环境搭建</h2><p>最近在学习微信开发，为了方便调试以及后期部署决定买一个轻量的服务器和域名折腾一下。毕竟对于以后的学习来说，一个域名和一个云服务器还是很必要的。大概折腾了一天吧，终于把这个环境搭好了，不过安全方面可能还有很大问题，现在在这篇文章里记录一下目前的成果，对于和我一样的小白来说还是很有参考价值的。</p>
+<h3 id="云服务器的选择与购买："><a href="#云服务器的选择与购买：" class="headerlink" title="云服务器的选择与购买："></a>云服务器的选择与购买：</h3><p>因为一直对阿里这个企业有好感，我就毫不犹豫地选择了<a href="https://www.aliyun.com" target="_blank" rel="external">阿里云</a>这一平台。此外，为了降低学习的成本，选择了阿里云里可以说最便宜的<strong>轻量应用服务器</strong>（土豪请忽略。。。）。<br>​<br><strong>服务器的详细配置如下：</strong></p>
+<pre><code>- 系统镜像：CentOS 7.3
+- CPU：1 核
+- 内存：1 GB
+- 带宽：1 Mbps
+- SSD：20 GB
+</code></pre><p><img src="http://ostletczs.bkt.clouddn.com/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAaliyun.png" alt="aliyun"></p>
+<p>购买之后，就可以进入控制台了，这里建议大家把服务器的<strong>公网域名</strong>在记事本上记录一下，方便以后查阅。</p>
+<h3 id="远程登录云服务器："><a href="#远程登录云服务器：" class="headerlink" title="远程登录云服务器："></a>远程登录云服务器：</h3><p>在控制台中进入远程登录服务器页面下，进入客户端选项卡，选择客户端使用账号密码进行连接，点击设置密码，即可设置登录服务器时的 root 用户登录密码。设置成功后即可利用该密码登录远程云服务器。</p>
+<h4 id="本地通过-SSH-登录云服务器"><a href="#本地通过-SSH-登录云服务器" class="headerlink" title="本地通过 SSH 登录云服务器"></a>本地通过 SSH 登录云服务器</h4><p>打开本地终端，使用 root 用户登录云服务器：<br> <code>ssh root@[云服务器 ip 地址]</code></p>
+<p>之后在提示输入密码的命令下，输入上一步中在阿里云控制台中配置的 root 用户登录密码，正确输入后，即可进入云服务器。</p>
+<p>在命令行下，输入 <code>exit</code> 即可登出云服务器。</p>
+<p><img src="http://ostletczs.bkt.clouddn.com/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAsshroot.png" alt="sshroot"></p>
+<p>那每次都要输入服务器的 ip 地址，无疑大大增加了记忆成本，这里我们通过修改 <code>.zshrc</code> 文件的配置，来设置快捷命令。</p>
+<p>首先在命令行下，执行命令 <code>cd &amp;&amp; vi .zshrc</code> 打开 <code>.zshrc</code> 文件。<br>修改 <code>Example aliaes</code> 部分。</p>
+<p>在注释后输入 <code>alias ssh_aliyun=&quot;ssh root [阿里云服务器 ip 地址]&quot;</code></p>
+<p><img src="http://ostletczs.bkt.clouddn.com/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAzsh.png" alt="zsh"></p>
+<p>修改后，别忘了在命令行中启用这个命令，执行 <code>source .zshrc</code></p>
+<p>之后再执行 <code>ssh_aliyun</code> 命令，就可以看见命令行中直接提示你输入密码了，是不是简便许多？<br>当然这还不算终极的解决方案，之后我们会用 <code>ssh-key</code> 的方法，直接免密码登录。</p>
+<h4 id="CentOS-下创建用户"><a href="#CentOS-下创建用户" class="headerlink" title="CentOS 下创建用户"></a>CentOS 下创建用户</h4><p>刚买下来的云服务器是没有普通用户角色的，只有一个 root 用户，由于 Linux 下的 root 用户权限很高，很容易误操作，所以我们需要在云服务器上创建一个新用户，之后的项目部署操作等等都通过这个用户完成。</p>
+<p>首先登录阿里云服务器，执行如下命令：</p>
+<p> <code>adduser [你希望创建的用户名]</code>      —  添加用户</p>
+<p> <code>passwd [上一步创建的用户名]</code>        —  为新用户设置登录密码（需要重复输入两次）</p>
+<p>到此，我们的新用户就创建出来了。但是这个就像我们的新员工一样，刚来报道，权限较低。只可以在本用户 <code>home</code> 下有完整权限，其他目录则需要授权。而经常需要 root 用户的权限，这时候可以使用 <code>sudo</code>  命令暂时化身为 root 来操作。新创建的用户并不能使用sudo命令，需要给他添加授权。</p>
+<p>CentOS 下  <code>sudo</code> 命令的授权管理是放在 <code>sudoers</code> 文件中的。</p>
+<p>该文件路径通过下图命令可以查到是 <code>/etc/sudoers</code> ，且我们可以发现，只有 root 用户对该文件有操作权限（默认是只读权限）。</p>
+<p>为了修改这个文件，需要进行权限修改 <code>chomod -v u+w /etc/sudoers</code></p>
+<p><img src="http://ostletczs.bkt.clouddn.com/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAsudoers.png" alt="sudoers"></p>
+<p>修改权限后，进入 vim 编辑器打开该文件 <code>vi /etc/sudoers</code>。<br>找到如下位置进行修改，并保存退出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">## Allow root to run any commands anywher</div><div class="line">root    ALL=(ALL)       ALL</div><div class="line">[你创建的用户名]  ALL=(ALL)     ALL  #这个是新增的用户，追加这一行</div></pre></td></tr></table></figure>
+<p>保存后别忘了把该文件的写权限收回 <code>chmod -v u-w /etc/sudoers</code></p>
+<p>测试，新开一个终端窗口输入命令<br> <code>ssh [你新建的用户名]@[阿里云服务器 ip 地址]</code></p>
+<p>之后根据提示输入新用户的密码，即可使用新用户进行登录。<br>因为我们之后不需要利用 root 登录了，所以你可以把之前配置的<code>.zshrc</code> 文件的快捷命令，更改为使用新用户登录时候的命令。</p>
+<blockquote>
+<p>注：之后我们所有在服务器上的操作，都是登录的这个新用户进行的</p>
+</blockquote>
+<h4 id="本地和服务器生成-SSH-KEY-来完成免密码登录"><a href="#本地和服务器生成-SSH-KEY-来完成免密码登录" class="headerlink" title="本地和服务器生成 SSH-KEY 来完成免密码登录"></a>本地和服务器生成 SSH-KEY 来完成免密码登录</h4><p>为了让我们的登录过程省去输入密码这一步骤，我们使用 <code>SSH-KEY</code> 的方式来完成登录操作。</p>
+<p>首先在<strong>本地终端</strong>上查看是否有 <code>SSH-KEY</code></p>
+<p><img src="http://ostletczs.bkt.clouddn.com/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAssh.png" alt="ssh"></p>
+<p>如果进入这个目录后，目录内有 <code>id_rsa</code>  和  <code>id_rsa.pub</code> 两个文件，说明你已经生成过了 <code>SSH-KEY</code>。</p>
+<blockquote>
+<p>注意：如果已经配置过了就不需要重新配置一遍，否则会连不上之前配置过的一些 git 仓库</p>
+</blockquote>
+<p>如果没有这个目录的话，在本地终端家目录下输入<br> <code>ssh-keygen -t rsa -b 4096 -C &#39;[你的某个邮箱]&#39;</code><br>就可以生成一对 SSH 秘钥了。</p>
+<p>本地生成秘钥后，需要把 SSH 代理开起来，执行命令<br> <code>eval &quot;$(ssh-agent -s)&quot;</code></p>
+<p>最后需要把 SSH key 加入到代理中<br> <code>ssh-add ~/.ssh/id_rsa</code></p>
+<p>登录阿里云服务器，在家目录下，同样生成一对 SSH 秘钥。</p>
+<p>之后在 <code>~/.ssh</code> 目录下新建一个授权文件 <code>authorized_keys</code><br>在这个文件中把刚才在本地生成的 <code>id_rsa.pub</code> 文件中的内容复制过来，保存并退出，这样服务器就持有了某台电脑的公钥，那么这台电脑就可以来登录这个服务器了，而且不需要输入密码的呦。</p>
+<p>啊对了，<code>ssh</code> 对目录的权限是有要求的，我们还需要把 <code>authorized_keys</code>  的权限修改一下 <code>chmod 600 ~/.ssh/authorized_keys</code> 。</p>
+<p>之后启用代理  <code>eval &quot;$(ssh-agent -s)&quot;</code><br>添加 SSH key <code>ssh-add ~/.ssh/id_rsa</code></p>
+<p>大功告成！<br>至此我们就可以通过在本地终端下输入一句命令就可以登录到远程服务器了~</p>
+<p><img src="http://ostletczs.bkt.clouddn.com/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAsshaliyun.png" alt="sshaliyun"></p>
+<h3 id="服务器-Node-环境搭建"><a href="#服务器-Node-环境搭建" class="headerlink" title="服务器 Node 环境搭建"></a>服务器 Node 环境搭建</h3><p>在完成远程连接服务器以后，我们就完全的获取到了”自己家的钥匙了“，接下来就要好好地”装修”一下这个家了。</p>
+<p>在服务器上配置 Node 环境和在本地上配置环境大同小异。这里我们选用 <a href="https://github.com/creationix/nvm" target="_blank" rel="external">nvm</a> 来管理 Node 版本。按照文档中的指示进行 nvm 的安装。</p>
+<p>安装成功后，执行 <code>nvm --version</code> 测试是否安装成功。</p>
+<blockquote>
+<p>如果报错没有该命令，可以新开一个命令行窗口，登录到远程服务器，再次测试，不出意外的应该 ok👌</p>
+</blockquote>
+<h4 id="利用-nvm-安装-Node"><a href="#利用-nvm-安装-Node" class="headerlink" title="利用 nvm 安装 Node"></a>利用 nvm 安装 Node</h4><p>安装 ： <code>nvm install v[你希望安装的 Node 版本号]</code><br>使用某一版本： <code>nvm use v[你希望使用的 Node 版本号]</code><br>设置为默认版本： <code>nvm alias default v[需要设置的默认 Node 版本号]</code><br>查看 Node 版本： <code>node -v</code></p>
+<p><img src="http://ostletczs.bkt.clouddn.com/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAnvm.png" alt="nvm"></p>
+<h4 id="部署测试"><a href="#部署测试" class="headerlink" title="部署测试"></a>部署测试</h4><p>这一步我们启动一个服务器，并且让其成功跑起来，看看是否能通过外界访问。</p>
+<p>在家目录下，新建 <code>app.js</code> 文件</p>
+<p><code>vi app.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// app.js</span></div><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</div><div class="line"></div><div class="line">http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</div><div class="line">	res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;)</div><div class="line">	res.end(<span class="string">'aliyun test!!!'</span>)</div><div class="line">&#125;).listen(<span class="number">3000</span>)</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'server is listening on port 3000'</span>)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注：我们当前用户并不是 root 用户，所以无法监听 80 端口，这里我们选择监听 3000 端口进行测试</p>
+</blockquote>
+<p>运行脚本<br> <code>pm2 start app.js</code></p>
+<p>阿里云为我们设置了防火墙，我们还需要在阿里云控制台中添加防火墙规则，把 3000 端口添加到规则中。</p>
+<p>添加完成后使用浏览器访问 <code>[阿里云公网 ip 地址:3000]</code> 即可看到该页面。</p>
+<p><img src="http://ostletczs.bkt.clouddn.com/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAfirewall.png" alt="firewall"></p>
+<p><img src="http://ostletczs.bkt.clouddn.com/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAtest.png" alt="test"></p>
+<h3 id="Nginx-配置"><a href="#Nginx-配置" class="headerlink" title="Nginx 配置"></a>Nginx 配置</h3><p>在上一步中，我们通过在浏览器中访问 <code>[阿里云服务器 ip 地址]:[端口号]</code>  的方式成功访问到了我们的页面。但是使用端口号的访问让我们很不满意，怎么和平常浏览网站不一样呢，有没有什么方法可以不输入端口号访问呢？</p>
+<p>这一步就来配置 Nginx 来完成这一目的。<br>其实之前一直在写前端，我对后台部署这方面也是所知寥寥。可以通俗点认为，Nginx 就是用来管理云服务器上的各个端口的大门。外界请求到我们的域名（ip 地址），Nginx 再根据配置文件，来把这个请求分发到云服务器的某个端口，让监听这个端口的后台程序去处理这个请求。这就实现了多个网站项目部署在同一台云服务器的方式。</p>
+<p><img src="http://ostletczs.bkt.clouddn.com/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAnginxpic.png" alt="nginxpic"></p>
+<p>安装 Nginx<br><code>sudo yum nginx</code><br>进入 Nginx 目录<br><code>cd /etc/nginx/conf.d</code><br>新建配置文件<br><code>sudo vi test-3000.conf</code><br>建议配置文件名为 <code>[域名]-[端口号].conf</code></p>
+<p>编辑配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">upstream test &#123;</div><div class="line">	server 127.0.0.1:3000;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">	listen 80;</div><div class="line">	server_name 39.105.89.85;    # 你自己的 ip</div><div class="line">	location / &#123;</div><div class="line">		proxy_set_header X-Real-IP $remote_addr;</div><div class="line">		proxy_set_header X-Forward-For $proxy_add_x_forwarded_for;</div><div class="line">		proxy_set_header Host $http_host;</div><div class="line">		proxy_set_header X-Nginx-Proxy true;</div><div class="line"></div><div class="line">		proxy_pass http://test;		# 和 upstream 相同</div><div class="line">		proxy_redirect off;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>保存并退出，测试配置文件<br><code>sudo nginx -t</code><br>测试成功后，重启 Nginx 服务器<br><code>sudo nginx -s reload</code><br>直接通过 ip 地址访问，即可访问到页面，可以看到返回的 response 中，我们的响应是通过 Nginx 代理的。</p>
+<p><img src="http://ostletczs.bkt.clouddn.com/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAnginxres.png" alt="nginxres"></p>
+<h3 id="域名购买与备案"><a href="#域名购买与备案" class="headerlink" title="域名购买与备案"></a>域名购买与备案</h3><p>折腾了这么半天，终于可以通过 ip 地址访问到我们的页面了，但是这还不是我们的最终目的，为了让所有用户能够方便的使用我们的网站，那么光使用 ip 还是不够的，并且很多开发平台，像微信公众号、七牛等都需要配置网站域名信息，他们是不支持 ip 地址配置的。种种需求吧，我们还得为我们的服务器购买一个域名。</p>
+<p>为了图省事，我就直接在阿里云的<a href="https://wanwang.aliyun.com/" target="_blank" rel="external">万网</a>下面买域名了。</p>
+<p>购买域名很简单，推荐 <code>.com</code> 和 <code>.cn</code> 域名，不要选择太过于个性的域名，否则后期备案比较麻烦。</p>
+<p>购买域名后，可以直接用阿里云的<a href="https://dc.console.aliyun.com/next/index#/domain/list/all-domain" target="_blank" rel="external">域名解析服务</a>来解析我们的域名。</p>
+<p>进入域名解析界面后，添加一条解析记录。<br>这里一般我们的记录类型是 A 记录，它是将一个域名解析为一个 ip 地址。<br>主机记录建议先添加 <code>www</code> 和 <code>@</code> 。<br>这样在浏览器端输入 <code>www.breezymelon.com</code> 和 <code>breezymelon.com</code> 都可以得到解析，符合我们平时上网的习惯。点击确认后，解析记录就添加好了。</p>
+<p><img src="http://ostletczs.bkt.clouddn.com/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAdns.png" alt="dns"></p>
+<p>等待几分钟后，我们在浏览器中输入刚才配置的域名，即可访问到我们的页面了！不过这里访问的并不是我们的 <code>app.js</code> 返回的页面信息，而是阿里云返回的提示页面。提示我们网站还没有备案，无法进行访问。</p>
+<p><img src="http://ostletczs.bkt.clouddn.com/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BAdomain.png" alt="domain"></p>
+<p>不得不说，这一套操作真的是很麻烦，接下来进入控制台准备备案。。。</p>
+<p>在备案之前，我们的域名需要进行<strong>实名认证</strong>，否则是不允许进入备案流程的。域名实名认证提交的材料很简单，个人的话只需要上传身份证即可。之后等待几天，即可完成域名实名认证。</p>
+<p>实名认证后，我们就可以走<a href="https://bsn.console.aliyun.com/" target="_blank" rel="external">备案流程</a>了，首先需要申请一个备案服务号，申请成功后按照流程去备案即可。备案所需上传的资料还是很多的，这里需要注意几点：</p>
+<pre><code>1. 网站名称的规范
+2. 核验单域名列表处需添加备案域名对应注册商中文名称的简称
+3. 正在备案的域名需要把域名隐私保护关闭
+</code></pre><p>提交材料后，一般当天就会有阿里云的工作人员联系你初审结果，如果有问题的话按照反馈邮件进行修改即可。</p>
+<p>初审过了以后，就要办理拍照流程了，我在写这篇文章的时候就办理到这。大概就是等阿里云把幕布寄过来，拍照片上传即可，接下来就等通知就好啦！其实还是很方便的，我一直以为备案是要自己跑公安局的那种，汗😓…</p>
+<p>到这里我们的云服务器的折腾就告一段落了，之后备案 ok 后，还会继续鼓捣。比如，证书、mongodb 数据库等等，最后最后还得真正部署一个自己练习的项目啊，不然不是白折腾了！</p>
+<p>记录完毕！希望有用！</p>
+
           
         
       
@@ -1657,8 +1755,6 @@
 <p>第一篇博客就介绍下自己吧，本科在北邮数媒学的工业设计，研究生换了专业去学数媒技术了，所以还要在我的小破邮呆三年。目前研零阶段，学了一段时间前端了，也算是入了门了，之后希望在前端技术上稳步前（pa）行，慢慢从小白变为大牛~</p>
 <h3 id="为啥要弄个博客嘞，你咋不上天嘞"><a href="#为啥要弄个博客嘞，你咋不上天嘞" class="headerlink" title="为啥要弄个博客嘞，你咋不上天嘞"></a>为啥要弄个博客嘞，你咋不上天嘞</h3><p>前一阵和同学一起听了一个百度学长的分享会，其中他着重分享了写博客的好处，以及一本书<a href="http://52kindle.top/book/view/408" title="《暗时间》mobi格式电子书下载" target="_blank" rel="external">《暗时间》</a>。这本书其实就是作者几年博客的精华，其中介绍了时间的利用和高效做事的一些方式和方法，大家有兴趣可以去读一读呦~</p>
 <p>总之，这次分享和这本书给我和同学带来的直接影响就是决定要弄一个博客😄也希望将来可以通过博客达成记录想法和知识、分享转载优秀内容和展示自己的目的。</p>
-<p>写博客难在坚持，但我就要看看自己能坚持多久💪  </p>
-<p>下一篇博客准备分享一下我搭建博客的过程，希望可以帮到想要搭建个人博客的同学们🙏</p>
 
           
         
@@ -1813,7 +1909,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
