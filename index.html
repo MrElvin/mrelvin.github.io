@@ -270,6 +270,209 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/14/一次前后端分离项目部署实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MrElvin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MrElvin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/06/14/一次前后端分离项目部署实践/" itemprop="url">
+                  一次前后端分离项目部署实践
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T21:07:28+08:00">
+                2018-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/14/一次前后端分离项目部署实践/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/06/14/一次前后端分离项目部署实践/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一次前后端分离项目部署实践"><a href="#一次前后端分离项目部署实践" class="headerlink" title="一次前后端分离项目部署实践"></a>一次前后端分离项目部署实践</h2><p>前一阵子在阿里云上弄来了一个月的轻量应用服务器，尴尬的是，好不容易把备案搞完，服务器这会又到期了。。。于是这次买了一个学生版一年的 ECS ，在经过<a href="http://www.breezymelon.com/2018/05/16/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" target="_blank" rel="external">相同的配置工作后</a>，终于可以开始真正进行项目部署了。</p>
+<h3 id="待部署项目介绍"><a href="#待部署项目介绍" class="headerlink" title="待部署项目介绍"></a>待部署项目介绍</h3><p>简单说来待部署的项目就是一个 <a href="http://todo.breezymelon.com/#/login" target="_blank" rel="external">todolist</a> ，项目内容和逻辑很简单，但是因为是我的第一个前后端独立完成的项目，所以开发起来还是有点费劲的，项目前端采用的是 Vue + Element 框架，后端采用的 Koa2，数据库使用的是 mongodb，可以说是对前端学习者来说相对友好的技术栈了。</p>
+<p>附上项目仓库 <a href="https://github.com/MrElvin/vue-koa-demo" target="_blank" rel="external">vue-koa-demo</a></p>
+<h4 id="关于跨域"><a href="#关于跨域" class="headerlink" title="关于跨域"></a>关于跨域</h4><p>在项目开发过程时，前端运行在 <code>localhost:8080</code>，后端运行在 <code>localhost:5858</code> ，这就存在跨域问题，一般来说跨域有两种解决方案，一个是在服务器端加上跨域资源共享（CORS）的请求头，另一个就是通过 webpack-dev-server 提供的代理来帮我们做映射，这样就可以把跨域请求映射为同域请求了。在项目中我采用的是第二种方案，因为这种方案非常简单，只需要对 webpack-dev-server 的配置进行几行改动即可完成目标（但是开发时发现这个方法有的时候会不太稳定 -_-||）。</p>
+<p><img src="http://pic.breezymelon.com/proxytable.png" alt="proxyTable"></p>
+<p>这段代码的意思就是把 <code>axios</code>  原来的请求相对路径 <code>http://localhost:8080/api</code>  映射到服务器端的 <code>http://localhost:5858</code></p>
+<h4 id="部署方案"><a href="#部署方案" class="headerlink" title="部署方案"></a>部署方案</h4><p>由于我们是采用的 webpack-dev-server 配置的方式解决的跨域问题，但是在生产环境下就没有 webpack 为我们做这一层映射了，所以在生产环境中，我们需要用 Koa 来托管由 webpack 打包出来的静态资源，这样前端 <code>axios</code> 请求的相对路径就和服务器是同域的了，不存在跨域的问题了。</p>
+<p>托管静态文件，可以使用 <code>koa-static</code>  完成，其中 <code>public</code>  中的内容就是 webpack 打包出来的 <code>dist</code>  文件夹下的内容。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// app.js</span></div><div class="line">app.use(<span class="built_in">require</span>(<span class="string">'koa-static'</span>)(path.join(__dirname, <span class="string">'public'</span>)))</div></pre></td></tr></table></figure></p>
+<h3 id="服务器端部署环境"><a href="#服务器端部署环境" class="headerlink" title="服务器端部署环境"></a>服务器端部署环境</h3><p>接下来就要弄一下服务器端的部署环境了，在<a href="http://www.breezymelon.com/2018/05/16/%E9%98%BF%E9%87%8C%E4%BA%91%20CentOS%20%E7%8E%AF%E5%A2%83%E4%B8%8B%20Node%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" target="_blank" rel="external">之前的博客</a>里，已经把 Node 环境配置完成了，接下来就要安装一下一些必要的工具了，完成部署环境了（额这次并没有用到 Docker 什么的，因为是第一次试探性地，以后可以详细学习一下）。</p>
+<h4 id="mongodb-数据库的安装与简单配置"><a href="#mongodb-数据库的安装与简单配置" class="headerlink" title="mongodb 数据库的安装与简单配置"></a>mongodb 数据库的安装与简单配置</h4><p>关于 CentOS 下数据库的安装，参考<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/" target="_blank" rel="external">官网流程</a>就行了，我感觉说的很详细了，安装的时候也没啥坑。</p>
+<p>安装成功后，启动数据库  <code>sudo service mongod start</code> ，默认情况下 mongodb 是不需要输入用户名密码的，所以在终端下，连接数据库  <code>mongo</code> ，连接成功后，我们就需要建立一些用户角色了</p>
+<ol>
+<li>建立一个用于账号管理的用户</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">use admin				// 切换到 admin 数据库</div><div class="line">db.createUser(&#123;		// 创建一个用户</div><div class="line">	user: &apos;yourUserName&apos;,		// 管理员用户名</div><div class="line">	pwd: &apos;yourPassWord&apos;,		// 密码</div><div class="line">	roles: [</div><div class="line">		&#123;</div><div class="line">			role: &apos;userAdminAnyDatabase&apos;,	// 用户角色，允许所有数据库的 userAdmin 权限，可管理所有数据库的管理用户</div><div class="line">			db: &apos;admin&apos;			// 指定数据库</div><div class="line">		&#125;</div><div class="line">	]</div><div class="line">&#125;)</div><div class="line">db.auth(&apos;yourUserName&apos;, &apos;yourPassWord&apos;)	// 用户验证，返回 1 说明验证成功</div></pre></td></tr></table></figure>
+<ol>
+<li>建立一个用于项目数据库管理的用户</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">use vue_koa_todos		// 切换到项目数据库</div><div class="line">db.createUser(&#123;</div><div class="line">	user: &apos;yourProjectUserName&apos;,	// 数据库管理员用户名</div><div class="line">	pwd: &apos;yourProjectPassWord&apos;,		// 密码</div><div class="line">	roles: [</div><div class="line">		&#123;</div><div class="line">			role: &apos;readWrite&apos;,		// 用户角色，允许读写指定数据库</div><div class="line">			db: &apos;vue_koa_todos&apos;		// 指定数据库</div><div class="line">		&#125;</div><div class="line">	]</div><div class="line">&#125;)</div><div class="line">db.auth(&apos;yourProjectUserName&apos;, &apos;yourProjectPassWord&apos;)	// 用户验证，返回 1 说明验证成功</div></pre></td></tr></table></figure>
+<blockquote>
+<p>建议把这些账号密码都存起来，省着忘了。。。  </p>
+</blockquote>
+<p>建立账号之后还没完，需要更改一下配置文件，默认情况下，配置文件在<br><code>/etc/mongod.conf</code> ，之后在 vi 编辑器下修改配置文件，找到这两行，改成如下所示，保存并退出后，重启一下数据库 <code>sudo service mongod restart</code>，数据库的验证就开启了，这时候如果要查看或者操作数据库，就需要输入用户名和密码了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">security:</div><div class="line">	authorization: &apos;enabled&apos;</div></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li><p>在登录数据库的时候，需要先指定数据库名比如  <code>use vue_koa_todos</code> ，再进行 <code>db.auth</code> 验证  </p>
+</li>
+<li><p>用 admin 下建立的那个用户是登不上 <code>vue_koa_todos</code> 数据库的，别看它的角色是 <code>anydatabase</code> ，它只能操作数据库的用户管理部分  </p>
+</li>
+</ol>
+</blockquote>
+<h4 id="安装一些其他的工具（本地和服务器端都需要安装）"><a href="#安装一些其他的工具（本地和服务器端都需要安装）" class="headerlink" title="安装一些其他的工具（本地和服务器端都需要安装）"></a>安装一些其他的工具（本地和服务器端都需要安装）</h4><p><strong>git :</strong> <code>yum install -y git</code></p>
+<p><strong>pm2:</strong> <code>npm install pm2 -g</code></p>
+<blockquote>
+<p>这里服务器端需要配置一下对 github 的 ssh 秘钥，便于部署后自动拉取代码  </p>
+</blockquote>
+<h4 id="对本地代码进行调整"><a href="#对本地代码进行调整" class="headerlink" title="对本地代码进行调整"></a>对本地代码进行调整</h4><ol>
+<li>部署前需要把之前连接本地数据库的代码改一下</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// server/routes/index.js</span></div><div class="line"></div><div class="line"><span class="comment">// 本地开发的时候，数据库链接是直接连的</span></div><div class="line">mongoose.connect(<span class="string">'mongodb://127.0.0.1:27017/vue_koa_todos'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 上线后因为有用户名和密码，所以要改动一下</span></div><div class="line">mongoose.connect(<span class="string">'mongodb://username:userpwd@127.0.0.1:27017/vue_koa_todos'</span>)</div></pre></td></tr></table></figure>
+<p>数据库连接格式：</p>
+<p><code>mongodb://用户名:密码@服务器主机地址:mongodb运行端口/要连接的数据库名称</code></p>
+<ol>
+<li>项目 <code>package.json</code>  文件中的 <code>git</code>  字段要和 <code>github</code> 中的 <code>git</code>  地址关联上 </li>
+</ol>
+<p>到这里我们的环境已经基本搞定了，接下来就是部署了。</p>
+<h3 id="利用-pm2-进行一键部署"><a href="#利用-pm2-进行一键部署" class="headerlink" title="利用 pm2 进行一键部署"></a>利用 pm2 进行一键部署</h3><p>打开终端进入项目根路径，执行 <code>pm2 init</code>  会得到一份 <code>ecosystem.config.js</code> 这里就是我们的部署配置文件了，需要做一些改动</p>
+<p><img src="http://pic.breezymelon.com/pm2.png" alt="pm2"></p>
+<p><code>post-deploy</code> 中是发布后执行的一些命令，主要在 <code>run.sh</code> 里</p>
+<p><img src="http://pic.breezymelon.com/deploy.png" alt="deploy"></p>
+<blockquote>
+<ol>
+<li>为了避免因为服务器端登录密码验证而导致部署失败，建议配置一下 ssh 登录，或者在 <code>production</code>  中加入 <code>&quot;ssh_options&quot;: &quot;StrictHostKeyChecking=no&quot;</code>  </li>
+<li><code>post-deploy</code> 中的 <code>git pull</code> 其实是可以不用加的，但是我在实际操作时候，发现不加的话，本地每次更新代码的时候，服务器端并不会自动拉去新的代码，在网上查了一下说是和版本有关也和服务器有关。。。所以这里只能强加一个 <code>git pull</code>  命令，保证更新了  </li>
+<li>使用淘宝镜像安装是因为项目中用到了 <code>node-sass</code>  依赖，如果不用的话会偶尔出现部署失败的情况   </li>
+</ol>
+</blockquote>
+<p>配置文件改好后，我们在<strong>本地终端</strong>执行命令 <code>pm2 deploy ecosystem.config.js production setup</code> 进行项目初始化</p>
+<p>执行后，如果成功的话会发现服务器端的指定目录下 <code>/home/breezymelon/vue-koa-demo</code> 多出了几个文件夹，其中 <code>source</code> 文件目录下就是我们的源代码了，服务器自动去 <code>github</code>  拉取的结果。</p>
+<p><img src="http://pic.breezymelon.com/dir.png" alt="dir"></p>
+<p>之后再执行发布命令 <code>pm2 deploy ecosystem.config.js production</code> 就可以等待部署了。</p>
+<p><img src="http://pic.breezymelon.com/deployok.png" alt="deployOk"></p>
+<p>当我们在本地对代码有新的 push 后，再次执行  <code>pm2 deploy ecosystem.config.js production</code>  即可完成部署更新。</p>
+<p>在服务器上执行 <code>pm2 list</code>  可以观察到项目已经正常运行了！如果不能正常运行的话 <code>pm2 log</code> 查看一下日志信息，一般都是数据库连接错了，不会出现什么大问题。</p>
+<p><img src="http://pic.breezymelon.com/pm2list.png" alt="pm2list"></p>
+<h3 id="配置-Nginx-实现网页访问"><a href="#配置-Nginx-实现网页访问" class="headerlink" title="配置 Nginx 实现网页访问"></a>配置 Nginx 实现网页访问</h3><p><code>sudo vi /etc/nginx/conf.d</code>  新建一个如下的配置文件</p>
+<p><img src="http://pic.breezymelon.com/todoconf.png" alt="todoconf"></p>
+<p>保存退出后 <code>sudo nginx -t &amp;&amp; sudo service nginx restart</code></p>
+<p>就可以在浏览器看见自己的项目了！</p>
+<p><img src="http://pic.breezymelon.com/todopage.png" alt="todoPage"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>从本地开发前后端，到买服务器域名备案再到配置环境最后到部署，大概历时一个月了，终于看见完全由自己搞的第一个上线的项目了。虽然项目很简单，而且上线的配置也很初级，更不用说优化了，但是对于一个新手来说来说有了这份体验还是很不错的~学习的路还很长，这次实践也意识到了一个项目从无到有需要的掌握的知识真的很多，也体验到了作为学生来说切实可行的学习路线应该是首先做到对前端的专注，之后再慢慢一点一点积累服务端知识吧。不慌慢慢学，心急一事无成。</p>
+<p>这篇文章到这就结束啦，我感觉说的挺详（mo）细（ji）的了，如果对和我一样的新手玩家有所帮助的话就最好不过了！！！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/14/面向对象精要/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2402,7 +2605,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2415,7 +2618,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
