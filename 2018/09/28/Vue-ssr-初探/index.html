@@ -87,24 +87,24 @@
 
 
 
-<meta name="description" content="Vue SSR 初探前段时间弄了一个前后端分离的 vue-koa-demo，最近为这个项目提供了 Vue SSR 的支持。项目比较简单，所以转成 Vue SSR 成本还是不太大的，但是其中也踩了几个坑，在此记录一下。
+<meta name="description" content="前段时间弄了一个前后端分离的 vue-koa-demo，最近为这个项目提供了 Vue SSR 的支持。项目比较简单，所以转成 Vue SSR 成本还是不太大的，但是其中也踩了几个坑，在此记录一下。
 一开始接触 Vue SSR 当然还是 官方文档 和 官方案例 了，学习了解之后我们就可以自己照葫芦画瓢了。
-Vue SSR 与 Vue当我们使用 Vue 来编写我们的单页面应用的时候">
+Vue SSR 与 Vue当我们使用 Vue 来编写我们的单页面应用的时候，我们所有的业务代码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue ssr 初探">
 <meta property="og:url" content="http://yoursite.com/2018/09/28/Vue-ssr-初探/index.html">
 <meta property="og:site_name" content="MrElvin">
-<meta property="og:description" content="Vue SSR 初探前段时间弄了一个前后端分离的 vue-koa-demo，最近为这个项目提供了 Vue SSR 的支持。项目比较简单，所以转成 Vue SSR 成本还是不太大的，但是其中也踩了几个坑，在此记录一下。
+<meta property="og:description" content="前段时间弄了一个前后端分离的 vue-koa-demo，最近为这个项目提供了 Vue SSR 的支持。项目比较简单，所以转成 Vue SSR 成本还是不太大的，但是其中也踩了几个坑，在此记录一下。
 一开始接触 Vue SSR 当然还是 官方文档 和 官方案例 了，学习了解之后我们就可以自己照葫芦画瓢了。
-Vue SSR 与 Vue当我们使用 Vue 来编写我们的单页面应用的时候">
+Vue SSR 与 Vue当我们使用 Vue 来编写我们的单页面应用的时候，我们所有的业务代码">
 <meta property="og:image" content="http://pic.breezymelon.com/ssr/ssr原理.png">
 <meta property="og:image" content="http://pic.breezymelon.com/ssr/ssr-preview.png">
-<meta property="og:updated_time" content="2018-09-28T09:11:47.345Z">
+<meta property="og:updated_time" content="2018-09-28T09:22:01.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue ssr 初探">
-<meta name="twitter:description" content="Vue SSR 初探前段时间弄了一个前后端分离的 vue-koa-demo，最近为这个项目提供了 Vue SSR 的支持。项目比较简单，所以转成 Vue SSR 成本还是不太大的，但是其中也踩了几个坑，在此记录一下。
+<meta name="twitter:description" content="前段时间弄了一个前后端分离的 vue-koa-demo，最近为这个项目提供了 Vue SSR 的支持。项目比较简单，所以转成 Vue SSR 成本还是不太大的，但是其中也踩了几个坑，在此记录一下。
 一开始接触 Vue SSR 当然还是 官方文档 和 官方案例 了，学习了解之后我们就可以自己照葫芦画瓢了。
-Vue SSR 与 Vue当我们使用 Vue 来编写我们的单页面应用的时候">
+Vue SSR 与 Vue当我们使用 Vue 来编写我们的单页面应用的时候，我们所有的业务代码">
 <meta name="twitter:image" content="http://pic.breezymelon.com/ssr/ssr原理.png">
 
 
@@ -360,7 +360,7 @@ Vue SSR 与 Vue当我们使用 Vue 来编写我们的单页面应用的时候">
       
 
       
-        <h1 id="Vue-SSR-初探"><a href="#Vue-SSR-初探" class="headerlink" title="Vue SSR 初探"></a>Vue SSR 初探</h1><p>前段时间弄了一个前后端分离的 <a href="https://github.com/MrElvin/vue-koa-demo/tree/master" target="_blank" rel="external">vue-koa-demo</a>，最近为这个项目提供了 Vue SSR 的支持。项目比较简单，所以转成 Vue SSR 成本还是不太大的，但是其中也踩了几个坑，在此记录一下。</p>
+        <p>前段时间弄了一个前后端分离的 <a href="https://github.com/MrElvin/vue-koa-demo/tree/master" target="_blank" rel="external">vue-koa-demo</a>，最近为这个项目提供了 Vue SSR 的支持。项目比较简单，所以转成 Vue SSR 成本还是不太大的，但是其中也踩了几个坑，在此记录一下。</p>
 <p>一开始接触 Vue SSR 当然还是 <a href="https://ssr.vuejs.org/zh/" target="_blank" rel="external">官方文档</a> 和 <a href="https://github.com/vuejs/vue-hackernews-2.0/" target="_blank" rel="external">官方案例</a> 了，学习了解之后我们就可以自己照葫芦画瓢了。</p>
 <h2 id="Vue-SSR-与-Vue"><a href="#Vue-SSR-与-Vue" class="headerlink" title="Vue SSR 与 Vue"></a>Vue SSR 与 Vue</h2><p>当我们使用 Vue 来编写我们的单页面应用的时候，我们所有的业务代码最后都会被 webpack 打包到 <code>dist</code> 目录下，当浏览器输入 URL 来向服务端请求页面的时候，我们的服务器都会返回 <code>dist</code> 下的 <code>index.html</code> 这个文件，但是打开这个文件我们就能发现，这个文件很简单里面都是各种文件链接，只有一个 <code>&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</code> 这么一个内容。我们在浏览器里看到的丰富多彩内容，都是加载完 html 文档里的脚本文件后执行并渲染出来的。这样的页面需要等待脚本文件全部执行才可以展现给我们在网络较差（下载脚本慢）或运行速度慢（运行脚本慢）的设备上显示很慢；不利于 SEO，当然也不利于我们爬取数据（比如我之前爬取的 <a href="https://movie.douban.com/annual/2017?source=navigation" target="_blank" rel="external">豆瓣的 2017 年的电影总结</a> 爬完发现就返回了这么一个 <code>div#app</code> ）。</p>
 <p>而我们使用了 Vue SSR 就不一样了，服务器返回的 html 立马变得丰富了起来，服务器直接返回渲染好的 html。</p>
@@ -622,7 +622,7 @@ Vue SSR 与 Vue当我们使用 Vue 来编写我们的单页面应用的时候">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-SSR-初探"><span class="nav-number">1.</span> <span class="nav-text">Vue SSR 初探</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-SSR-与-Vue"><span class="nav-number">1.1.</span> <span class="nav-text">Vue SSR 与 Vue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对项目进行-SSR-支持"><span class="nav-number">1.2.</span> <span class="nav-text">对项目进行 SSR 支持</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改main-js-和-router-js"><span class="nav-number">1.2.1.</span> <span class="nav-text">修改main.js 和 router.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加客户端打包入口-entry-client-js-和服务端打包入口-entry-server-js"><span class="nav-number">1.2.2.</span> <span class="nav-text">增加客户端打包入口 entry-client.js 和服务端打包入口 entry-server.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-webpack-配置"><span class="nav-number">1.2.3.</span> <span class="nav-text">修改 webpack 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新增-webpack-client-conf-js-用于打包客户端-bundle"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">新增 webpack.client.conf.js 用于打包客户端 bundle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新增-webpack-server-conf-js-用来打包服务端-bundle"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">新增 webpack.server.conf.js 用来打包服务端 bundle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提供开发模式热加载"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">提供开发模式热加载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改服务端-app-js"><span class="nav-number">1.2.4.</span> <span class="nav-text">修改服务端 app.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改一下-npm-script"><span class="nav-number">1.2.5.</span> <span class="nav-text">修改一下 npm script</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-number">1.2.6.</span> <span class="nav-text">运行</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-SSR-与-Vue"><span class="nav-number">1.</span> <span class="nav-text">Vue SSR 与 Vue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对项目进行-SSR-支持"><span class="nav-number">2.</span> <span class="nav-text">对项目进行 SSR 支持</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改main-js-和-router-js"><span class="nav-number">2.1.</span> <span class="nav-text">修改main.js 和 router.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加客户端打包入口-entry-client-js-和服务端打包入口-entry-server-js"><span class="nav-number">2.2.</span> <span class="nav-text">增加客户端打包入口 entry-client.js 和服务端打包入口 entry-server.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-webpack-配置"><span class="nav-number">2.3.</span> <span class="nav-text">修改 webpack 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新增-webpack-client-conf-js-用于打包客户端-bundle"><span class="nav-number">2.3.1.</span> <span class="nav-text">新增 webpack.client.conf.js 用于打包客户端 bundle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新增-webpack-server-conf-js-用来打包服务端-bundle"><span class="nav-number">2.3.2.</span> <span class="nav-text">新增 webpack.server.conf.js 用来打包服务端 bundle</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提供开发模式热加载"><span class="nav-number">2.3.3.</span> <span class="nav-text">提供开发模式热加载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改服务端-app-js"><span class="nav-number">2.4.</span> <span class="nav-text">修改服务端 app.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改一下-npm-script"><span class="nav-number">2.5.</span> <span class="nav-text">修改一下 npm script</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-number">2.6.</span> <span class="nav-text">运行</span></a></li></ol></li></ol></div>
             
 
           </div>

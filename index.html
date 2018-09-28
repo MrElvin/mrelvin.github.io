@@ -357,7 +357,7 @@
       
         
           
-            <h1 id="Vue-SSR-初探"><a href="#Vue-SSR-初探" class="headerlink" title="Vue SSR 初探"></a>Vue SSR 初探</h1><p>前段时间弄了一个前后端分离的 <a href="https://github.com/MrElvin/vue-koa-demo/tree/master" target="_blank" rel="external">vue-koa-demo</a>，最近为这个项目提供了 Vue SSR 的支持。项目比较简单，所以转成 Vue SSR 成本还是不太大的，但是其中也踩了几个坑，在此记录一下。</p>
+            <p>前段时间弄了一个前后端分离的 <a href="https://github.com/MrElvin/vue-koa-demo/tree/master" target="_blank" rel="external">vue-koa-demo</a>，最近为这个项目提供了 Vue SSR 的支持。项目比较简单，所以转成 Vue SSR 成本还是不太大的，但是其中也踩了几个坑，在此记录一下。</p>
 <p>一开始接触 Vue SSR 当然还是 <a href="https://ssr.vuejs.org/zh/" target="_blank" rel="external">官方文档</a> 和 <a href="https://github.com/vuejs/vue-hackernews-2.0/" target="_blank" rel="external">官方案例</a> 了，学习了解之后我们就可以自己照葫芦画瓢了。</p>
 <h2 id="Vue-SSR-与-Vue"><a href="#Vue-SSR-与-Vue" class="headerlink" title="Vue SSR 与 Vue"></a>Vue SSR 与 Vue</h2><p>当我们使用 Vue 来编写我们的单页面应用的时候，我们所有的业务代码最后都会被 webpack 打包到 <code>dist</code> 目录下，当浏览器输入 URL 来向服务端请求页面的时候，我们的服务器都会返回 <code>dist</code> 下的 <code>index.html</code> 这个文件，但是打开这个文件我们就能发现，这个文件很简单里面都是各种文件链接，只有一个 <code>&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</code> 这么一个内容。我们在浏览器里看到的丰富多彩内容，都是加载完 html 文档里的脚本文件后执行并渲染出来的。这样的页面需要等待脚本文件全部执行才可以展现给我们在网络较差（下载脚本慢）或运行速度慢（运行脚本慢）的设备上显示很慢；不利于 SEO，当然也不利于我们爬取数据（比如我之前爬取的 <a href="https://movie.douban.com/annual/2017?source=navigation" target="_blank" rel="external">豆瓣的 2017 年的电影总结</a> 爬完发现就返回了这么一个 <code>div#app</code> ）。</p>
 <p>而我们使用了 Vue SSR 就不一样了，服务器返回的 html 立马变得丰富了起来，服务器直接返回渲染好的 html。</p>
